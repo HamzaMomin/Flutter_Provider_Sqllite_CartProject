@@ -5,6 +5,8 @@ import 'package:flutter_application_provider_sql/class_provider.dart';
 import 'package:flutter_application_provider_sql/db_helper.dart';
 import 'package:provider/provider.dart';
 
+import 'cart_screen.dart';
+
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
 
@@ -52,16 +54,21 @@ class _ProductListState extends State<ProductList> {
         title: const Text('Product List'),
         centerTitle: true,
         actions:  [
-          Center(
-            child: badges.Badge(
-             badgeContent: Consumer<CartProvider>
-             (builder: ((context, value, child) {
-               return Text(value.getCounter().toString(),style: TextStyle(color: Colors.white));
-             }),),
-              badgeAnimation: badges.BadgeAnimation.rotation(
-                animationDuration: Duration(seconds: 1),
+          InkWell(
+            onTap: (){
+               Navigator.push(context,MaterialPageRoute(builder: (context) => Cart_Screen()));
+            },
+            child: Center(
+              child: badges.Badge(
+               badgeContent: Consumer<CartProvider>
+               (builder: ((context, value, child) {
+                 return Text(value.getCounter().toString(),style: TextStyle(color: Colors.white));
+               }),),
+                badgeAnimation: badges.BadgeAnimation.rotation(
+                  animationDuration: Duration(seconds: 1),
+                ),
+                child: Icon(Icons.shopping_bag_outlined),
               ),
-              child: Icon(Icons.shopping_bag_outlined),
             ),
           ),
           SizedBox(
