@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_provider_sql/class_provider.dart';
+import 'package:flutter_application_provider_sql/cart_provider.dart';
 import 'package:flutter_application_provider_sql/product_list.dart';
 import 'package:provider/provider.dart';
+import 'cart_provider.dart';
 
 void main() {
   runApp(const MyApp());

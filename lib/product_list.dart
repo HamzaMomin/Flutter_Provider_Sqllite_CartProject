@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter_application_provider_sql/cart_modal.dart';
-import 'package:flutter_application_provider_sql/class_provider.dart';
+import 'package:flutter_application_provider_sql/cart_provider.dart';
 import 'package:flutter_application_provider_sql/db_helper.dart';
 import 'package:provider/provider.dart';
 
@@ -56,7 +56,7 @@ class _ProductListState extends State<ProductList> {
         actions:  [
           InkWell(
             onTap: (){
-               Navigator.push(context,MaterialPageRoute(builder: (context) => Cart_Screen()));
+               Navigator.push(context,MaterialPageRoute(builder: (context) => const CartScreen()));
             },
             child: Center(
               child: badges.Badge(
@@ -175,6 +175,10 @@ class _ProductListState extends State<ProductList> {
                                   ],
                                 ),
                               ),
+                              
+
+
+
                             ],
                           )
                         ]),
@@ -184,3 +188,4 @@ class _ProductListState extends State<ProductList> {
     );
   }
 }
+

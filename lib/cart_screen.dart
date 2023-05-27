@@ -1,18 +1,19 @@
-import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
 import 'cart_modal.dart';
-import 'class_provider.dart';
+import 'cart_provider.dart';
 
-class Cart_Screen extends StatefulWidget {
-  const Cart_Screen({super.key});
+
+
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  State<Cart_Screen> createState() => _Cart_ScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _Cart_ScreenState extends State<Cart_Screen> {
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context);
@@ -42,6 +43,7 @@ class _Cart_ScreenState extends State<Cart_Screen> {
         ),
         body: Column(
           children: [
+            
             FutureBuilder(
                 future: cart.getData(),
                 builder: (context, AsyncSnapshot<List<Cart>> snapshot) {
@@ -124,12 +126,46 @@ class _Cart_ScreenState extends State<Cart_Screen> {
                                   ),
                                 ),
                               );
-                            }));
+                            }
+                            )
+                            );
                   }
                   //error on the backet
                   return Text('');
-                })
+                }),
+            Consumer<CartProvider>(builder: (context, value, child){
+              return Visibility(
+                visible: value.gettotalPrice().toStringAsFixed(2) == "0.00" ? false : true,
+                child: Column(
+                  children: [
+                    ReusableWidget(title: 'Sub Total', value: r'$'+value.gettotalPrice().toStringAsFixed(2),),
+                    ReusableWidget(title: 'Discout 5%', value: r'$'+'20',),
+                    ReusableWidget(title: 'Total', value: r'$'+value.gettotalPrice().toStringAsFixed(2),)
+                  ],
+                ),
+              );
+            })
+          
           ],
         ));
+  }
+}
+
+class ReusableWidget extends StatelessWidget {
+  final String title , value ;
+  const ReusableWidget({required this.title, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title , style: Theme.of(context).textTheme.titleSmall,),
+          Text(value.toString() , style: Theme.of(context).textTheme.titleSmall,)
+        ],
+      ),
+    );
   }
 }
