@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_provider_sql/cart_provider.dart';
-import 'package:flutter_application_provider_sql/product_list.dart';
+import 'package:flutter_application_provider_sql/provider/count_provider.dart';
+import 'package:flutter_application_provider_sql/screen/count_screen.dart';
 import 'package:provider/provider.dart';
-import 'cart_provider.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -14,23 +14,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+  
     return ChangeNotifierProvider(
-      create: (_)=> CartProvider(),
-      child: Builder(builder: (BuildContext  context)
-      {
-            return MaterialApp(
+      create: (_) => CountProvider(),
+      child: MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
      
         primarySwatch: Colors.blue,
       ),
-      home: const ProductList()
-    );
-
-      } ),
-      
-      
+      home: const CountExample()
+    ),
       );
+  
+      } 
+     
   }
-}
+
